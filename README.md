@@ -3,7 +3,7 @@
 A starter project to test the ins and outs of Vue.js
 
 ## TODO : 
- - [ ] Vue Getting Started
+ - [x] Vue Getting Started
  - [ ] Create a simple TODO
  - [ ] Add tests
  - [ ] Webpack experiments
@@ -11,3 +11,5 @@ A starter project to test the ins and outs of Vue.js
  - [ ] Host on nginx
  - [ ] ...
 
+## Cheatsheet
+ - `npm create vue@latest`
