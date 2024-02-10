@@ -1,0 +1,12 @@
+{
+  "name": "vue-sandbox",
+  "version": "1.0.0",
+  "description": "A starter project to test the ins and outs of Vue.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "@jsheridanwells",
+  "repository": "https://github.com/jsheridanwells/vue-sandbox",
+  "license": "MIT"
+}
