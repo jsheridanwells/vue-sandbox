@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import TodoList from './components/TodoList.vue';
+import AddTodo from './components/AddTodo.vue';
 
-let newTodoDescription = '';
-
+// TODO : how to create service to separate list BL from component?
 const todoList = [
     { id: 1, description: 'Learn Vue', isDone: false },
     { id: 2, description: '???', isDone: false },
@@ -11,7 +12,7 @@ const todoList = [
 
 const todoListRef = ref(todoList);
 
-function addTodo() {
+function onAddTodo(newTodoDescription) {
     const lastTodo = todoListRef.value[todoListRef.value.length - 1];
     const newTodo = {
         id: lastTodo ? lastTodo.id + 1 : 1,
@@ -20,10 +21,9 @@ function addTodo() {
     };
 
     todoListRef.value.push(newTodo);
-    newTodoDescription = '';
 }
 
-function removeTodo(id) {
+function onRemoveTodo(id) {
     todoListRef.value = todoListRef.value.filter(item => item.id !== id);
 }
 
@@ -35,56 +35,16 @@ function removeTodo(id) {
             Jeremy's First Todo
         </h1>
     </header>
-    <section class="todo-list">
-        <ul>
-            <li v-for="item in todoListRef" :key="item.id" class="todo-list-item">
-                {{ item.description }} 
-                <span class="remove" @click="removeTodo(item.id)">x</span>
-            </li>
-        </ul>
+    <section class="todo-list-section">
+        <TodoList :todoList="todoListRef" @remove-todo="onRemoveTodo" />
     </section>
-    <section class="new-todo-form">
-        <form @submit.prevent="addTodo">
-            <label for="new-todo">New Item: </label>
-            <input type="text" name="new-todo" id="new-todo" v-model="newTodoDescription" />
-            <button type="submit">
-                Add Todo
-            </button>
-        </form>
+    <section class="new-todo-form-section">
+        <AddTodo @add-todo="onAddTodo" />
     </section>
 </template>
 
 <style scoped>
 section {
     margin: 0;
-}
-
-.todo-list ul {
-    margin: 0;
-    padding: 0;
-}
-
-.todo-list ul li,
-.new-todo-form {
-    border: 1px solid red;
-    margin: 1rem 3rem;
-    padding: 1rem;
-    display: block;
-}
-
-.todo-list ul li,
-.new-todo-form form {
-    display: flex;
-    gap: 10px;
-    padding: 0.5rem;
-}
-
-.todo-list ul li {
-    justify-content: space-between;
-    padding: 1rem 1rem 2rem 1rem;
-}
-
-.remove {
-    cursor: pointer;
 }
 </style>

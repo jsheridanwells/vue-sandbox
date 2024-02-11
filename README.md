@@ -5,7 +5,8 @@ A starter project to test the ins and outs of Vue.js
 ## TODO : 
  - [x] Vue Getting Started
  - [x] Create a simple TODO
- - [ ] Break down into parent/child components
+ - [x] Break down into parent/child components
+ - [] Add service/state manager (w/ IOC?)
  - [ ] Add tests
  - [ ] Webpack experiments
  - [ ] Save to external API
