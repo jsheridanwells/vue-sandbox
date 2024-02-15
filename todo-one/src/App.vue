@@ -1,32 +1,24 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 import TodoList from './components/TodoList.vue';
 import AddTodo from './components/AddTodo.vue';
 
-// TODO : how to create service to separate list BL from component?
-const todoList = [
+// TODO : App.vue should just be a layout parent, but now it has to be the 
+// repo for all the data for its descendants :(
+const defaultTodoList = [
     { id: 1, description: 'Learn Vue', isDone: false },
     { id: 2, description: '???', isDone: false },
     { id: 3, description: 'Profit!', isDone: false },
 ];
 
-const todoListRef = ref(todoList);
+const todoList = ref(defaultTodoList);
 
-function onAddTodo(newTodoDescription) {
-    const lastTodo = todoListRef.value[todoListRef.value.length - 1];
-    const newTodo = {
-        id: lastTodo ? lastTodo.id + 1 : 1,
-        description: newTodoDescription,
-        isDone: false,
-    };
+provide('todoList', { todoList, updateTodoList });
 
-    todoListRef.value.push(newTodo);
+function updateTodoList(newList) {
+    console.log('update todo?', newList);
+    todoList.value = newList;
 }
-
-function onRemoveTodo(id) {
-    todoListRef.value = todoListRef.value.filter(item => item.id !== id);
-}
-
 </script>
 
 <template>
@@ -36,10 +28,10 @@ function onRemoveTodo(id) {
         </h1>
     </header>
     <section class="todo-list-section">
-        <TodoList :todoList="todoListRef" @remove-todo="onRemoveTodo" />
+        <TodoList />
     </section>
     <section class="new-todo-form-section">
-        <AddTodo @add-todo="onAddTodo" />
+        <AddTodo />
     </section>
 </template>
 

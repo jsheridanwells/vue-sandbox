@@ -1,18 +1,24 @@
-
 <script setup>
 import { ref } from 'vue';
+import { inject } from 'vue';
 const newTodoRef = ref('');
+const { todoList, updateTodoList } = inject('todoList');
 
-const emit = defineEmits(['addTodo']);
-
-function emitNewTodo(desc) {
-    emit('addTodo', newTodoRef.value);
+function addTodo(newTodoDescription) {
+    const newTodo = {
+        id: 999,
+        description: newTodoDescription,
+        isDone: false,
+    };
+    const newList = todoList.value
+    newList.push(newTodo);
+    updateTodoList(newList);
     newTodoRef.value = '';
 }
 </script>
 
 <template>
-    <form class="new-todo-form" @submit.prevent="emitNewTodo(newTodoRef)">
+    <form class="new-todo-form" @submit.prevent="addTodo(newTodoRef)">
         <label for="new-todo">New item: </label>
         <input type="text" name="new-todo" id="new-todo" v-model="newTodoRef" />
         <button type="submit">
