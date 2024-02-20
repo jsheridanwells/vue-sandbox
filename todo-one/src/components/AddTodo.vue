@@ -1,18 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { inject } from 'vue';
+import { todoListStore } from '../stores/todo-list';
+
 const newTodoRef = ref('');
-const { todoList, updateTodoList } = inject('todoList');
+const todoList = todoListStore();
 
 function addTodo(newTodoDescription) {
-    const newTodo = {
-        id: 999,
-        description: newTodoDescription,
-        isDone: false,
-    };
-    const newList = todoList.value
-    newList.push(newTodo);
-    updateTodoList(newList);
+    todoList.add(newTodoDescription);
     newTodoRef.value = '';
 }
 </script>
