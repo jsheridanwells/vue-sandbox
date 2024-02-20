@@ -1,12 +1,10 @@
 <script setup>
-import { inject } from 'vue';
-
-const { todoList, updateTodoList } = inject('todoList');
+import { todoListStore } from '@/stores/todo-list';
 const props = defineProps(['item']);
+const todoList = todoListStore();
 
 function removeTodo(id) {
-    const newList = todoList.value.filter(item => item.id !== id);
-    updateTodoList(newList);
+    todoList.remove(id);
 }
 </script>
 
