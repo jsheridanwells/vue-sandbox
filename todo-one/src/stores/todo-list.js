@@ -18,7 +18,7 @@ function add(description) {
     this.todoList.push({
         id,
         description,
-        idDone: false
+        isDone: false
     });
 }
 
