@@ -15,7 +15,6 @@ function provideTodoList() {
 }
 
 function addTodo(todo) {
-    console.log('todo?', todo);
     if (!todo || !todo?.id || !todo?.description) {
         throw new Error('invalid argument: ', todo);
     }
