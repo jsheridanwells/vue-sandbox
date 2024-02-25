@@ -1,16 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { mount } from '@vue/test-utils';
-import { createTestingPinia } from '@pinia/testing'
+import { shallowMount } from '@vue/test-utils';
 import App from '@/App.vue';
 
 describe('App', () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = mount(App, {
-            global: {
-                plugins: [createTestingPinia({ createSpy: vi.fn })],
-            }
-        });
+        wrapper = shallowMount(App);
     });
 
     it('renders a title', () => {

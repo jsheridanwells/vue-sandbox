@@ -7,13 +7,16 @@ const _defaultTodoList = [
 ];
 
 function add(description) {
-    if (!description.length) {
+    if (!description || !description.length) {
         throw new Error('Invalid argument');
     }
 
-    let id = (this.todoList.reduce((max, x) => x.id > max.id ? x : max))?.id;
-    id ?? 0;
-    id++;
+    let id = 1;
+    
+    if (this.todoList.length) {
+        id = (this.todoList.reduce((max, x) => x.id > max.id ? x : max))?.id;
+        id++;
+    }
 
     this.todoList.push({
         id,
